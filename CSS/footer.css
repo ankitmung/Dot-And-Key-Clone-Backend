@@ -1,0 +1,38 @@
+#footBox *{
+    font-family: Lato, sans-serif;
+    
+
+}
+#footBox{
+border-top:1px solid black;
+width:90%;
+margin: 50px auto;
+display: grid;
+grid-template-columns: auto auto auto;
+}
+.footerTitle{
+color:#3c3c3c;
+letter-spacing: 2px;
+font-size: 24px;
+}
+.footerContent{
+color:#858578;
+font-weight: lighter;
+font-size:medium;
+
+letter-spacing: 2px;
+}
+
+#footBox button{
+width:120px;
+height:50px;
+margin-left: 20px;
+background-color: #3c3c3c;
+color:white;
+}
+#footBox input{
+border:none;
+border-bottom:1px solid black;
+
+
+}
