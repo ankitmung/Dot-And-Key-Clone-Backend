@@ -39,15 +39,14 @@
 
    async function Register(){
         let detail={
-                name:document.getElementById("name").value,
-                lastName : document.getElementById("lastName").value,
+                first_name:document.getElementById("name").value,
+                last_name : document.getElementById("lastName").value,
                 email:document.getElementById("email").value,
                 password:document.getElementById("password").value,
-                username:document.getElementById("email").value
             };
-            console.log(detail)
+            // console.log(detail)
           try{
-            const response = await fetch(`http://localhost:3000/users`, {
+            const response = await fetch(`http://localhost:3000/register`, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                
                 
@@ -58,8 +57,17 @@
                 },
                body: JSON.stringify(detail) // body data type must match "Content-Type" header
               });
-          }catch(e){
-              return e
+
+              console.log(await response.json())
+            // const x= await fetch(`http://localhost:3000/users`)
+            // // console.log(x)
+            // const res=await x.json();
+            // console.log(res)
+            
+            
+          }catch(err){
+
+              console.log(err.message)
           }
             
     //         if(detail.email =="" || detail.lastName == "" || detail.name == "" || detail.password == "")
