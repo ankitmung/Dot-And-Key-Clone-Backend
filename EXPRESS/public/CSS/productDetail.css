@@ -1,0 +1,203 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+#prodcont{
+    display: grid;
+    grid-template-columns: 50% 45%;
+    width: 85%;
+    margin: auto;
+}
+#imgperk{
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto;
+    
+}         
+/*div{
+    /* border: 2px solid red;  
+} 
+*/
+#descplist{
+    list-style: disc;
+    font-size: 10px;
+    font-family: Roboto, Ubuntu, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-style: italic;
+    color: #3C3C3C;
+    margin-top: 50px;
+}
+#images{
+    display: grid;
+    grid-template-columns: 16% 84%;
+}
+#smallimg{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: scroll;
+    overflow: hidden;
+}
+#bigimg>img{
+    width: 100%;
+    border-radius: 10px;
+}
+#smallimg>img{
+    width: 88%;
+    margin: 5px;
+    border-radius: 8px;
+    
+}
+li{
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+#second{
+    margin-left: 50px;
+}
+#pec{
+    margin-left: 50px;
+    font-size: 25.999px;
+    text-decoration: line-through;
+    color: #3C3C3C;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#divpri{
+    display: flex;
+}
+#disc{
+    /* margin-left: 50px; */
+    font-size: 25.999px;
+    color: #FF6781;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+#second>div>p{
+    margin: 0px;
+    padding: 0px;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+}
+#perkslist{
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    list-style-image: url('../photos/bullet.png');
+}
+#heartbtn{
+    display: flex;
+}
+#heart{
+    /* font-weight: 800px; */
+    font-size: 40px;
+    color: #3C3C3C;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#size>button{
+    border: 2px solid #3C3C3C;
+   background-color: white;
+   padding:9px 15px;
+   margin-left: 10px;
+   margin-top: 5px;
+   font-size: 20px;
+}
+#size{
+    display: flex;
+}
+#title{
+    font-size: 30px;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #3C3C3C;
+}
+#footcont>div>img{
+    width: 130px;
+    margin-left: 50px;
+
+}
+#footcont>div>h1{
+    font-family: Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    font-weight: normal;
+    margin-left: 35%;
+    color: #3C3C3C;
+}
+#footcont{
+    display: flex;
+    width: 50%;
+    margin: auto;
+}
+#blow{
+    padding-top: 10px;
+}
+#ratings{
+    display: flex;
+    margin-top: 10px;
+}
+#ratings{
+    font-size: 20px;
+    
+}
+#pinked{
+    
+    margin-top: 15px;
+}
+.perks-to-love
+{
+    background-color: #FFF6F8;
+    padding: 10px 30px;
+    line-height: 0.8;
+    margin-top: 50px;
+    letter-spacing: 1px;
+}
+.perks-to-love > h2
+{
+    color: #FE506E;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#smallimg{
+    height: 500px;
+    overflow: scroll;
+}
+
+
+
+@media (max-width:1024px){
+    .perks-to-love {
+       
+        margin-top: 0px;
+       
+    }
+    #title{
+        font-size: 16px;
+    }
+    #divpri h3{
+        font-size: 6px;
+    }
+    #decsrp ul li{
+        font-size: 14px;
+    }
+    .perks-to-love ul li{
+        font-size: 14px;
+
+    }
+    #ratings span{
+        font-size: 14px;
+    }
+    .sizetoggel{
+       width: 20%;
+       font-size: 12px;
+    }
+    #addToCartBtn{
+        width: 50% !important;
+    }
+}
+@media (max-width:770px){
+    #prodcont{
+        display: grid;
+        grid-template-columns: auto;
+        width: 95%;
+        margin: auto;
+    }
+}

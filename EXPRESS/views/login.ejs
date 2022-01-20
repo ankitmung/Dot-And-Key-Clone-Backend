@@ -36,8 +36,8 @@
     <link rel="icon" href="https://cdn.shopify.com/s/files/1/0361/8553/8692/files/d_and_k_and_logo_1_32x32.png?v=1593074179">
     <link rel="stylesheet" href="/CSS/loginsignup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./CSS/footer.css">
-    <link rel="stylesheet" href="../../CSS/nav.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/nav.css">
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
 </head>
 <body>
@@ -84,4 +84,13 @@
     </div>
 </body>
 </html>
+<script type="module">
+  import  {navBar,popUp} from './JS/navbar.js';
+  document.getElementById("nav-container").innerHTML = navBar();
+  popUp();
+
+  import footer from './JS/footer.js';
+  console.log(footer)
+  document.getElementById("footer-container").innerHTML = footer();
+</script>
 <script src="JS/login.js"></script>
