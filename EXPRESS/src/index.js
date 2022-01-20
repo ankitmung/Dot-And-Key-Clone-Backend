@@ -22,9 +22,9 @@ app.post("/register",register)
 app.post("/login",login)
 app.post("/users", async (req, res) => {
     try {
-      const item = await User.create(req.body);
+      //const item = await User.create(req.body);
   
-      return res.status(201).send(item);
+      return res.status(201).send(req.body);
     } catch (err) {
       return res.status(500).send(err.message);
     }
