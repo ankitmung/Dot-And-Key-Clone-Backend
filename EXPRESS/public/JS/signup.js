@@ -64,8 +64,7 @@
               myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; ${result.message}`, false);
             else
               {
-                // signup successful
-                // redirect to login page
+                location.href = "/loginpage";
               }
           }catch(err){
 

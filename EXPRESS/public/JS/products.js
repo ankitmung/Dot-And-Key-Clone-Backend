@@ -1,25 +1,30 @@
 
     var productsContainer = document.getElementById("products-container");
 
-var data={res:""};
-let data2;
-async function func(data){
+// var data={res:""};
+// let data2;
+async function func(){
     try{
-        const res= fetch("http://localhost:3000/data")
-        .then(x=>{
-            console.log(x.json())
-        })
+        const res= await fetch("http://localhost:3000/data")
+        var data  = await res.json();
+        console.log(data.res);
+        showData(data.res);
+        // // .then(x=>{
+        // //     console.log(x.json())
+        // // })
         //  let x=await res.json();
         //  console.log(x)
         //  data.res=x;
-         showData(x); 
+        //  showData(x); 
          
         // console.log(data)
        1
     }catch(err){
-        console.log(err.massege)
+        console.log(err.message)
     }
 }
+
+func();
 // console.log(data2)
 // var url = window.location.href;
 // console.log(url);
@@ -57,7 +62,6 @@ async function func(data){
     //console.log(arr);
 
 
-    func(data);
     // document.getElementById("test").textContent=JSON.parse(data);
     // console.log(data)
    
@@ -65,7 +69,6 @@ async function func(data){
     // showData(data); 
     function showData(data)
     {
-        data2=data;
         // console.log(data2)
         productsContainer.innerHTML = ""; 
         if(data.length == 0 || data==undefined || data == null)
@@ -145,159 +148,159 @@ async function func(data){
         });
     }
     }
-// function to redirect the page to product details page
-    function redirectToIndividualProductPage(id)
-    {
-        window.location.href = `productDetail.html?${id}`;
-    }
+// // function to redirect the page to product details page
+//     function redirectToIndividualProductPage(id)
+//     {
+//         window.location.href = `productDetail.html?${id}`;
+//     }
     
-    // Working on filteration and sorting
-    var cate = document.getElementById("category-filter");
-    cate.addEventListener("change", filter);
-    var sorting = document.getElementById("sorting-filter")
-    sorting.addEventListener("change", (sorting) =>{
-        sortingFilter(sorting.value);
-    });
+//     // Working on filteration and sorting
+//     var cate = document.getElementById("category-filter");
+//     cate.addEventListener("change", filter);
+//     var sorting = document.getElementById("sorting-filter")
+//     sorting.addEventListener("change", (sorting) =>{
+//         sortingFilter(sorting.value);
+//     });
 
 
-    var filteredData = data;
-    // Filter function will work according to passed product category
-    function filter(e)
-    {
-        var category = e.target.value;
-        // if user selects the default filter, genrate all products again
-        if(category == "default")
-        {
-            filteredData = data;
-            showData(data); 
-        }
-        // if user selects any specific product category, show the products of that category
-        else
-        {
-                var temp = [];
-                data.forEach(item => {
-                if(item.category == category)
-                    temp.push(item);
-                })  
-                filteredData = temp;
-                var sortingTitle = document.getElementById("sorting-filter").value;
-                if(sortingTitle != "defualt")
-                    sortingFilter(sortingTitle)
-                showData(filteredData);
-        }      
-    }
-    // Sorting Filter 
-    function sortingFilter(e)
-    {
-        var sortingTitle = e;
-        // if user selects the default sorting, genrate all products again
-        if(sortingTitle == "defualt")
-        {
-            filteredData = data;
-            showData(data); 
-        }
-        // if user selects any specific sorting criteria, show the products in that order
-        else
-        {
-            // sort by price low to high
-                if(sorting.value == "price-low-high")
-                {
-                filteredData.sort(function (a,b)
-                     {
-                        return Math.floor(a.price-(a.price*a.discount/100)) - Math.floor(b.price-(b.price*b.discount/100));
-                    });
-                showData(filteredData);
-                }
+//     var filteredData = data;
+//     // Filter function will work according to passed product category
+//     function filter(e)
+//     {
+//         var category = e.target.value;
+//         // if user selects the default filter, genrate all products again
+//         if(category == "default")
+//         {
+//             filteredData = data;
+//             showData(data); 
+//         }
+//         // if user selects any specific product category, show the products of that category
+//         else
+//         {
+//                 var temp = [];
+//                 data.forEach(item => {
+//                 if(item.category == category)
+//                     temp.push(item);
+//                 })  
+//                 filteredData = temp;
+//                 var sortingTitle = document.getElementById("sorting-filter").value;
+//                 if(sortingTitle != "defualt")
+//                     sortingFilter(sortingTitle)
+//                 showData(filteredData);
+//         }      
+//     }
+//     // Sorting Filter 
+//     function sortingFilter(e)
+//     {
+//         var sortingTitle = e;
+//         // if user selects the default sorting, genrate all products again
+//         if(sortingTitle == "defualt")
+//         {
+//             filteredData = data;
+//             showData(data); 
+//         }
+//         // if user selects any specific sorting criteria, show the products in that order
+//         else
+//         {
+//             // sort by price low to high
+//                 if(sorting.value == "price-low-high")
+//                 {
+//                 filteredData.sort(function (a,b)
+//                      {
+//                         return Math.floor(a.price-(a.price*a.discount/100)) - Math.floor(b.price-(b.price*b.discount/100));
+//                     });
+//                 showData(filteredData);
+//                 }
                 
-            // sort by price high to low
-                else if(sorting.value == "price-high-low")
-                {
-                filteredData.sort(function (a,b)
-                     {
-                        return Math.floor(b.price-(b.price*b.discount/100)) - Math.floor(a.price-(a.price*a.discount/100));
-                    });
-                showData(filteredData);
-                }
-            // sort by rating low to high
-                else if(sorting.value == "rating-low-high")
-                {
-                filteredData.sort(function (a,b)
-                     {
-                        return a.rating - b.rating; 
-                    });
-                showData(filteredData);
-                }
+//             // sort by price high to low
+//                 else if(sorting.value == "price-high-low")
+//                 {
+//                 filteredData.sort(function (a,b)
+//                      {
+//                         return Math.floor(b.price-(b.price*b.discount/100)) - Math.floor(a.price-(a.price*a.discount/100));
+//                     });
+//                 showData(filteredData);
+//                 }
+//             // sort by rating low to high
+//                 else if(sorting.value == "rating-low-high")
+//                 {
+//                 filteredData.sort(function (a,b)
+//                      {
+//                         return a.rating - b.rating; 
+//                     });
+//                 showData(filteredData);
+//                 }
                 
-            // sort by price high to low
-                else if(sorting.value == "rating-high-low")
-                {
-                filteredData.sort(function (a,b)
-                     {
-                        return b.rating - a.rating; 
-                    });
-                showData(filteredData);
-                }
+//             // sort by price high to low
+//                 else if(sorting.value == "rating-high-low")
+//                 {
+//                 filteredData.sort(function (a,b)
+//                      {
+//                         return b.rating - a.rating; 
+//                     });
+//                 showData(filteredData);
+//                 }
                 
-            // sort by A-Z
-                else if(sorting.value == "A-Z")
-                {
-                filteredData.sort(function (a,b)
-                     {
-                        return a.title.localeCompare(b.title);
-                    });
-                showData(filteredData);
-                }
-                // sort by Z-A
-                else if(sorting.value == "Z-A")
-                {
-                filteredData.sort(function (a,b)
-                     {
-                        return b.title.localeCompare(a.title);
-                    });
-                showData(filteredData);
-                }
-        }   
-    }
+//             // sort by A-Z
+//                 else if(sorting.value == "A-Z")
+//                 {
+//                 filteredData.sort(function (a,b)
+//                      {
+//                         return a.title.localeCompare(b.title);
+//                     });
+//                 showData(filteredData);
+//                 }
+//                 // sort by Z-A
+//                 else if(sorting.value == "Z-A")
+//                 {
+//                 filteredData.sort(function (a,b)
+//                      {
+//                         return b.title.localeCompare(a.title);
+//                     });
+//                 showData(filteredData);
+//                 }
+//         }   
+//     }
 
-    // Add to cart functionality
-let item={};
-let userDetail=JSON.parse(localStorage.getItem("userDetail"));
-function addToCart(id){
+//     // Add to cart functionality
+// let item={};
+// let userDetail=JSON.parse(localStorage.getItem("userDetail"));
+// function addToCart(id){
 
-    console.log(id);
-    if(userDetail==null || !(userDetail.login)){
-        // alert("you need to login first")
-        myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
-    }else{
+//     console.log(id);
+//     if(userDetail==null || !(userDetail.login)){
+//         // alert("you need to login first")
+//         myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
+//     }else{
     
-        item.email=userDetail.email;
+//         item.email=userDetail.email;
         
-        item.id=id;
-        // Adding size as defualt value. Because product page has no option se select size;
-        item.size = "Default";
+//         item.id=id;
+//         // Adding size as defualt value. Because product page has no option se select size;
+//         item.size = "Default";
         
-            console.log()
-            let itemflag=false;
-            let cartArray=JSON.parse(localStorage.getItem("cartItem"))||[];
-            console.log(cartArray.size)
-            for(let i=0;i<cartArray.length;i++){
-                if(cartArray[i].id===item.id&&cartArray[i].size===item.size&&cartArray[i].email===item.email){
-                    //console.log("HEre")
-                    itemflag=true;
-                    break;
-                }
-            }
-            if(itemflag==true){
-                // alert("item Alredy added")
-                myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
-            }else{
-                myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true);
-                cartArray.push(item);
-                localStorage.setItem("cartItem",JSON.stringify(cartArray));
+//             console.log()
+//             let itemflag=false;
+//             let cartArray=JSON.parse(localStorage.getItem("cartItem"))||[];
+//             console.log(cartArray.size)
+//             for(let i=0;i<cartArray.length;i++){
+//                 if(cartArray[i].id===item.id&&cartArray[i].size===item.size&&cartArray[i].email===item.email){
+//                     //console.log("HEre")
+//                     itemflag=true;
+//                     break;
+//                 }
+//             }
+//             if(itemflag==true){
+//                 // alert("item Alredy added")
+//                 myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
+//             }else{
+//                 myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true);
+//                 cartArray.push(item);
+//                 localStorage.setItem("cartItem",JSON.stringify(cartArray));
             
-            }
-    }
-}
+//             }
+//     }
+// }
 
 // for pop up alert
 function myFunction(msg, type) {
