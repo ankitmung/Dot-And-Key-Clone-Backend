@@ -37,14 +37,14 @@ function navBar(){
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">BEST SELLERS</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">WINTER TOP PICKS</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">BY CONCERN</h4></a>
-                <a href="products.html" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">ALL PRODUCTS</h4></a>
+                <a href="/products" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">ALL PRODUCTS</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">NEW BODYCARE RANGE</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">MERCH STORE</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">GIFT, WITH LOVE</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">IKWI NUTRITION</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">KNOW US BETTER</h4></a>
                 <a href="userProfile.html" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">PROFILE</h4></a>
-                <a href="login.html" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">LOG IN</h4></a>
+                <a href="/loginpage" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">LOG IN</h4></a>
             </div>
             
             <div id="navPopLeft-Right">
