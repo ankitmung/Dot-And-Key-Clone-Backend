@@ -61,39 +61,42 @@
 
 
     async function login(){
-        username=document.getElementById("username").value
-        password=document.getElementById("password").value
+        var username=document.getElementById("username").value
+        var password=document.getElementById("password").value
 
-        let obj={
-            email:username,
-            password:password
-        }
-        
-        try{
-            const response = await fetch(`http://localhost:3000/login`, {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-               
-                
-               
-                headers: {
-                  'Content-Type': 'application/json'
-                  // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-               body: JSON.stringify(obj) // body data type must match "Content-Type" header
-              });
-
-              console.log(await response.json())
-            // const x= await fetch(`http://localhost:3000/users`)
-            // // console.log(x)
-            // const res=await x.json();
-            // console.log(res)
-            
-            
-          }catch(err){
-
-              console.log(err.message)
+        if(username == "" || password == "")
+            myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; All fields are Mandatory`, false);
+        else
+        {   
+          let obj={
+          email:username,
+          password:password
           }
-            
+      
+      try{
+          const response = await fetch(`http://localhost:3000/login`, {
+              method: 'POST', // *GET, POST, PUT, DELETE, etc.               
+              headers: {
+                'Content-Type': 'application/json'
+              },
+             body: JSON.stringify(obj)
+            });
+            var result = await response.json();
+            console.log(result);
+            if(result.status == "failed")
+              myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; ${result.message}`, false);
+            else
+              {
+                // login successful
+                // rest process
+              }
+              
+        }catch(err)
+        {
+            console.log(err.message)
+        }
+          
+        }
 
 
 
@@ -102,9 +105,7 @@
         // let flag=true;
 //         let userBag=JSON.parse(localStorage.getItem("userArray")) || [];
 //         var flag=false;
-//         if(username == "" || password == "")
-//              myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; All fields are Mandatory`, false);
-       
+//        
 //         else
 //         {
 //             userBag.map((item)=>{
@@ -128,29 +129,28 @@
 }
    
 // if(!flag)
-// myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; Invalid User Credentials`, false);
 // }
-// function myFunction(msg, type) {
-//     var popup = document.getElementById("myPopup");
-//     popup.innerHTML = msg;
-//     if(type)
-//     {
-//         popup.style.color="#3C763D";
-//         popup.style.backgroundColor = "#DFF0D8"; 
-//         popup.style.border = "2px solid #3C763D";
-//     }
-//     else
-//     {
-//         popup.style.color="maroon";
-//         popup.style.backgroundColor = "#F2DEDE"; 
-//         popup.style.border = "2px solid maroon";
-//     }
-//     popup.classList.toggle("show");
+function myFunction(msg, type) {
+    var popup = document.getElementById("myPopup");
+    popup.innerHTML = msg;
+    if(type)
+    {
+        popup.style.color="#3C763D";
+        popup.style.backgroundColor = "#DFF0D8"; 
+        popup.style.border = "2px solid #3C763D";
+    }
+    else
+    {
+        popup.style.color="maroon";
+        popup.style.backgroundColor = "#F2DEDE"; 
+        popup.style.border = "2px solid maroon";
+    }
+    popup.classList.toggle("show");
 
-//     const myTimeout = setTimeout(myGreeting, 3000);
+    const myTimeout = setTimeout(myGreeting, 3000);
     
-//     function myGreeting() {
-//    popup.classList.toggle("show");
-//   }
+    function myGreeting() {
+   popup.classList.toggle("show");
+  }
     
-//   }
+  }

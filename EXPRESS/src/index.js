@@ -37,9 +37,7 @@ return res.render("signUp")
 app.get("/index",(req,res)=>{
 return res.render("index")
 })
-const User= require("./model/user.model")
 const {register,login}=require('./controller/auth.controller');
-const { find } = require('./model/user.model');
 app.post("/register",register)
 app.post("/login",login)
 

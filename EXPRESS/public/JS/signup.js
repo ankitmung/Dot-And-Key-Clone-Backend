@@ -44,35 +44,35 @@
                 email:document.getElementById("email").value,
                 password:document.getElementById("password").value,
             };
-            // console.log(detail)
+
+          if(detail.email =="" || detail.lastName == "" || detail.name == "" || detail.password == "")
+                myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; All fields are mandatory`, false);
+          else
+          {
           try{
             const response = await fetch(`http://localhost:3000/register`, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
-               
-                
-               
                 headers: {
                   'Content-Type': 'application/json'
                   // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
                body: JSON.stringify(detail) // body data type must match "Content-Type" header
               });
-
-              console.log(await response.json())
-            // const x= await fetch(`http://localhost:3000/users`)
-            // // console.log(x)
-            // const res=await x.json();
-            // console.log(res)
-            
-            
+              var result = await response.json();
+            console.log("result"+result);
+            if(result.status == "failed")
+              myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; ${result.message}`, false);
+            else
+              {
+                // signup successful
+                // redirect to login page
+              }
           }catch(err){
 
               console.log(err.message)
           }
-            
-    //         if(detail.email =="" || detail.lastName == "" || detail.name == "" || detail.password == "")
-    //              myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; All fields are mandatory`, false);
-
+        }
+    
     //             else
     //             {
     //                 let userBag=JSON.parse(localStorage.getItem("userArray"))||[];
@@ -99,29 +99,30 @@
     //     }
     // }
     
-    // function myFunction(msg, type, n=0) {
-    //     var popup = document.getElementById("myPopup");
-    //     popup.innerHTML = msg;
-    //     if(type)
-    //     {
-    //         popup.style.color="#3C763D";
-    //         popup.style.backgroundColor = "#DFF0D8"; 
-    //         popup.style.border = "2px solid #3C763D";
-    //     }
-    //     else
-    //     {
-    //         popup.style.color="maroon";
-    //         popup.style.backgroundColor = "#F2DEDE"; 
-    //         popup.style.border = "2px solid maroon";
-    //     }
-    //     popup.classList.toggle("show");
+    function myFunction(msg, type, n=0) {
+        var popup = document.getElementById("myPopup");
+        popup.innerHTML = msg;
+        if(type)
+        {
+            popup.style.color="#3C763D";
+            popup.style.backgroundColor = "#DFF0D8"; 
+            popup.style.border = "2px solid #3C763D";
+        }
+        else
+        {
+            popup.style.color="maroon";
+            popup.style.backgroundColor = "#F2DEDE"; 
+            popup.style.border = "2px solid maroon";
+        }
+        popup.classList.toggle("show");
     
-    //     const myTimeout = setTimeout(myGreeting, 2000);
+        const myTimeout = setTimeout(myGreeting, 2000);
         
-    //     function myGreeting() {
-    //    popup.classList.toggle("show");
-    //    if(n==1)
-    //         window.location.href = "login.html";
-    //   }
+        function myGreeting() {
+       popup.classList.toggle("show");
+       if(n==1)
+            window.location.href = "login.html";
+      }
         
        }
+      }

@@ -15,7 +15,7 @@ const register=async(req,res)=>{
     let user=await User.findOne({email: req.body.email}).exec()
     if(user){
         res.status(400)
-        .send({message:"user with the email already exist"})
+        .send({status:"failed",message:"user with the email already exist"})
     }
     //2)if not then create the user
     //3)we will hash the password for the user
@@ -41,7 +41,7 @@ const login=async (req,res)=>{
 
         if(!user)
         return res.status(400)
-        .json({message:"either the email or password is incorrect"})
+        .json({status:"failed",message:"either the email or password is incorrect"})
 
         //3) if user found then try to match the password provided with the password in the model
         const match=user.checkPassword(req.body.password)
@@ -49,11 +49,11 @@ const login=async (req,res)=>{
         //4) if not match then throw an error 400 bad request
         if(!match)
         return res.status(400)
-        .json({message:"either the email or password is incorrect"})
+        .json({status:"failed",message:"either the email or password is incorrect"})
          
         //5)return the token and the user details
         const token =newToken(user)
-        return res.status(201).json({user,token})
+        return res.status(201).json({status:"success",user,token})
 
     }catch(e){
         return res.status(500).json({message: e.message})
