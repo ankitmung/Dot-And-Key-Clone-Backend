@@ -14,6 +14,18 @@ app.set("view engine", "ejs"); // root directory for views views/
 app.use("/products",(req,res)=>{
   return res.render("products")
 })
+
+
+app.get("/productDetail/:id",async(req,res)=>{
+  try{
+    const data=await Product.findById(req.params.id).lean().exec();
+    console.log(data)
+    return res.render("productDetails",{data})
+  }catch(err){
+    return res.status(400).json(err.message)
+  }
+ 
+})
 app.get("/data",async(req,res)=>{
   try{
     const data=await Product.find({}).lean().exec();

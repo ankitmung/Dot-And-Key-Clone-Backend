@@ -1,34 +1,34 @@
 let heartFlag=false;
 
 
-var url =  window.location.href;
- var output= "";
- for(var i=url.length-1; ;i--)
-     {
-         if(url[i] == "?")
-             break;
-         else
-             output+=url[i];
-     }
- output = output.split("").reverse().join("");
- console.log("id passed by previous page "+output);
+// var url =  window.location.href;
+//  var output= "";
+//  for(var i=url.length-1; ;i--)
+//      {
+//          if(url[i] == "?")
+//              break;
+//          else
+//              output+=url[i];
+//      }
+//  output = output.split("").reverse().join("");
+//  console.log("id passed by previous page "+output);
  
- var data = JSON.parse(localStorage.getItem("DotAndKeyProducts"));
+//  var data = JSON.parse(localStorage.getItem("DotAndKeyProducts"));
  
- var arr = [];
- for(var i=0; i<data.length; i++)
-     {
-         if(data[i].id == output)
-             {
-                 arr.push(data[i]);
-                 break;
-             }
-     }
-    //console.log(arr);
+//  var arr = [];
+//  for(var i=0; i<data.length; i++)
+//      {
+//          if(data[i].id == output)
+//              {
+//                  arr.push(data[i]);
+//                  break;
+//              }
+//      }
+//     //console.log(arr);
 
-var obj=arr[0];
+// var obj=arr[0];
 
-//console.log(obj)
+// //console.log(obj)
 
 
 let descul=document.getElementById("descplist");
