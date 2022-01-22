@@ -206,8 +206,8 @@ var cartPage = async ()=>{
       el.quantity = quentityArray[index];
     });
 
-    localStorage.setItem("cartItem", JSON.stringify(userCart));
-    console.log(userCart);
+    // localStorage.setItem("cartItem", JSON.stringify(userCart));
+    // console.log(userCart);
   }
 
 }
@@ -215,40 +215,12 @@ var cartPage = async ()=>{
 cartPage();
 
 
-// //All the product which have in the bakend side;
-// let prodBag = JSON.parse(localStorage.getItem("DotAndKeyProducts"));
-
-/// Cart bag which added by the user
-let cartBag = JSON.parse(localStorage.getItem("cartItem")) || [];
-
-/// calling the function to all the cart product on the page
-// showItem();
-
-////implimenting the function os showin all the product
-
-function showItem() {
-  //// cart bag update
-  cartBag = JSON.parse(localStorage.getItem("cartItem")) || [];
-
-  //console.log(cartBag)
-
-  ////Array of items which have added by the same user which currently useing the site on same machin
-  let userCart = [];
-  //to collect the items which is have in main cart bag
-  cartBag.forEach((el) => {
-    if (user.email === el.email) {
-      userCart.push(el);
-    }
-  });
-
-}
-
 ///check out button which redirect userto check out page
 document.getElementById("checkout").addEventListener("click", () => {
-  
+
     // myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; There is no product in cart to checkout`, false);
  
-    window.location.href = "address.html";
+    window.location.href = "/address";
   
 });
 
