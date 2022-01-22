@@ -9,7 +9,7 @@ function navBar(){
             </div>
         </div>
         <div class="logo">
-            <a href="index.html"><img src="https://cdn.shopify.com/s/files/1/0361/8553/8692/files/unnamed_250x_e80384cd-15b5-4e3e-a99b-7f852a0facad_260x.jpg?v=1604292598
+            <a href="/index"><img src="https://cdn.shopify.com/s/files/1/0361/8553/8692/files/unnamed_250x_e80384cd-15b5-4e3e-a99b-7f852a0facad_260x.jpg?v=1604292598
             "></a>
         </div>
         <div class="search">

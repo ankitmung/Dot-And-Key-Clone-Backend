@@ -11,9 +11,6 @@ async function func(){
         showData(data.res);
         data=data.res
         console.log(data)
-
-
-
         
     // Working on filteration and sorting
     var cate = document.getElementById("category-filter");
@@ -226,6 +223,49 @@ func();
 // }
 
 
+// add to cart function with backend
+
+let userDetail=JSON.parse(localStorage.getItem("userDetail"));
+
+let item={};
+async function addToCart(id)
+{
+    if(userDetail===null){
+        myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
+      }
+      else{
+
+    let itemToCheck = {
+        productID:id,
+        userID:userDetail._id,
+        size:"Default"
+    }
+
+   try{
+    const response = await fetch(`http://localhost:3000/checkCart`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+       body: JSON.stringify(itemToCheck) 
+      });
+      var result = await response.json();
+      console.log(result);
+      if(result.status == "failed")
+      {
+        myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
+      }
+      else{
+        myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true)
+      }
+   }
+   catch(err)
+   {
+       console.log(err.message);
+   }
+}
+}
+
 
 
 
@@ -296,7 +336,7 @@ function showData(data)
         productsContainer.innerHTML += 
         `
         <div class="card">
-       <div onclick="redirectToIndividualProductPage('${item.id}')"> 
+       <div onclick="redirectToIndividualProductPage('${item._id}')"> 
         <img src="${item.images[0]}">
         <div class="description">
             <label class="rating">${rating} ${item.rating}/5</label>
@@ -305,7 +345,7 @@ function showData(data)
         </div>
         <div class="discount">${disc}</div>
        </div>
-       <button onclick="addToCart('${item.id}')">Add to Cart</button>
+       <button onclick="addToCart('${item._id}')">Add to Cart</button>
     </div>
         `
     });

@@ -24,10 +24,19 @@ $(document).ready(function(){
 });
 
 var data = JSON.parse(localStorage.getItem("DotAndKeyProducts"));
-var main = document.getElementById("slider-container");
+//  function func(){
+//     try{
+//         // const res= await fetch("http://localhost:3000/data")
+//         // var data  = await res.json();
+//         // // console.log(data.res);
+//         // // showData(data.res);
+//         // data=data.res
+//         // // console.log(data)
+ 
+        var main = document.getElementById("slider-container");
 var count = 0;
 data.forEach(item => {
-   if(count <= 20)
+   if(count <= 10)
     {
         var x=Math.floor((item.discount/100)*item.price)
         x=item.price-x;
@@ -56,12 +65,23 @@ data.forEach(item => {
                     <div class="discount">
                         ${disc}
                         </div>
-                        <button onclick="addToCart('${item.id}')">Add to Cart</button>
+                        <button onclick="addToCart('${item._id}')">Add to Cart</button>
                 </div>
         `
     }
         count++
 })
+
+
+//     }
+//     catch(err){
+//         console.log(err.message);
+//     }
+// }
+
+// func();
+
+
 
 function redirectToProductDetailsPage(id)
 {

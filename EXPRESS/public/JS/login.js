@@ -82,13 +82,22 @@
              body: JSON.stringify(obj)
             });
             var result = await response.json();
-            console.log(result);
             if(result.status == "failed")
               myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; ${result.message}`, false);
             else
               {
-                // login successful
-                // rest process
+                // console.log(result.user);
+                let user={
+                  login:true,
+                  _id:result.user._id,
+                  name:result.user.first_name,
+                  lastName: result.user.last_name,
+                  email:result.user.email,
+              }
+              console.log(user)
+              localStorage.setItem("userDetail",JSON.stringify(user))
+              window.location.href="/index";
+              
               }
               
         }catch(err)

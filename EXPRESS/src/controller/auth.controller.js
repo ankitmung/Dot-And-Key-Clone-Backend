@@ -14,7 +14,7 @@ const register=async(req,res)=>{
 
     let user=await User.findOne({email: req.body.email}).exec()
     if(user){
-        res.status(400)
+        return res.status(400)
         .send({status:"failed",message:"user with the email already exist"})
     }
     //2)if not then create the user

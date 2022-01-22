@@ -1,38 +1,57 @@
-let item={};
-let userDetail=JSON.parse(localStorage.getItem("userDetail"));
-function addToCart(id){
 
-    console.log(id);
-    if(userDetail===null){
-      myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
-    }else{
-    
-        item.email=userDetail.email;
-        
-        item.id=id;
-        // Adding size as defualt value. Because product page has no option se select size;
-        item.size = "Default";
-        
-            console.log()
-            let itemflag=false;
-            let cartArray=JSON.parse(localStorage.getItem("cartItem"))||[];
-            console.log(cartArray.size)
-            for(let i=0;i<cartArray.length;i++){
-                if(cartArray[i].id===item.id&&cartArray[i].size===item.size&&cartArray[i].email===item.email){
-                    //console.log("HEre")
-                    itemflag=true;
-                    break;
-                }
-            }
-            if(itemflag==true){
-              myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
-            }else{
-              myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true);
-                cartArray.push(item);
-                localStorage.setItem("cartItem",JSON.stringify(cartArray));
-            
-            }
+let userDetail=JSON.parse(localStorage.getItem("userDetail"));
+
+async function func(){
+    try{
+        const res= await fetch("http://localhost:3000/data")
+        var data  = await res.json();
+        // console.log(data.res);
+        data=data.res
+        localStorage.setItem("DotAndKeyProducts", JSON.stringify(data));
     }
+    catch(err)
+    {
+        console.log(err.message);
+    }
+}
+func();
+let item={};
+async function addToCart(id)
+{
+    if(userDetail===null){
+        myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
+      }
+      else{
+
+    let itemToCheck = {
+        productID:id,
+        userID:userDetail._id,
+        size:"Default"
+    }
+
+   try{
+    const response = await fetch(`http://localhost:3000/checkCart`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+       body: JSON.stringify(itemToCheck) 
+      });
+      var result = await response.json();
+      console.log(result);
+      if(result.status == "failed")
+      {
+        myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
+      }
+      else{
+        myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true)
+      }
+   }
+   catch(err)
+   {
+       console.log(err.message);
+   }
+}
 }
 
 function myFunction(msg, type) {
