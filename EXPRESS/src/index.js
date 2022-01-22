@@ -34,14 +34,25 @@ app.post("/checkCart",async (req,res)=>{
 
 app.get("/productDetail/:id",async(req,res)=>{
   try{
-    const data=await Product.findById(req.params.id).lean().exec();
-    console.log(data)
-    return res.render("productDetails",{data})
+    // const data=await Product.findById(req.params.id).lean().exec();
+    // console.log(data)
+    return res.render("productDetails")
   }catch(err){
     return res.status(400).json(err.message)
   }
- 
 })
+
+
+app.post("/findProductDetails",async(req,res)=>{
+  try{
+    const data=await Product.findById(req.body.id).lean().exec();
+    console.log(data)
+    return res.json({item:data});
+  }catch(err){
+    return res.status(400).json(err.message)
+  }
+})
+
 app.get("/data",async(req,res)=>{
   try{
     const data=await Product.find({}).lean().exec();

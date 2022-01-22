@@ -1,41 +1,38 @@
 let heartFlag=false;
 
 
-// var url =  window.location.href;
-//  var output= "";
-//  for(var i=url.length-1; ;i--)
-//      {
-//          if(url[i] == "?")
-//              break;
-//          else
-//              output+=url[i];
-//      }
-//  output = output.split("").reverse().join("");
+var url =  window.location.href;
+ var output= "";
+ for(var i=url.length-1; ;i--)
+     {
+         if(url[i] == "/")
+             break;
+         else
+             output+=url[i];
+     }
+ output = output.split("").reverse().join("");
 //  console.log("id passed by previous page "+output);
- 
-//  var data = JSON.parse(localStorage.getItem("DotAndKeyProducts"));
- 
-//  var arr = [];
-//  for(var i=0; i<data.length; i++)
-//      {
-//          if(data[i].id == output)
-//              {
-//                  arr.push(data[i]);
-//                  break;
-//              }
-//      }
-//     //console.log(arr);
+async function printData(){
+    try{
+         
+ const response = await fetch(`http://localhost:3000/findProductDetails`, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+   body: JSON.stringify({id:output}) // body data type must match "Content-Type" header
+  });
+  var result = await response.json();
+  console.log(result);
 
-// var obj=arr[0];
-
-// //console.log(obj)
-
-
+  var obj = result.item;
+  
 let descul=document.getElementById("descplist");
 let perksul=document.getElementById("perkslist");
 let smallimg=document.getElementById("smallimg");
 let size=document.getElementById("size");
-console.log(obj)
+// console.log(obj)
 
 ////DISCRIPTION ADDING
 obj.description.map((item)=>{
@@ -165,11 +162,21 @@ div.addEventListener("click" ,()=>{
 size.append(div)
 })
 document.getElementById("blow").addEventListener("click", blow);
+    
+sizeAdded(obj.size[0]);
+    console.log(obj)
+    }
+    catch(e)
+    {
+        console.log(e.message);
+    }
+}
 
-//document.getElementById("heart").addEventListener("")
+printData();
+
 
 function blow(){
-console.log(heartFlag)
+// console.log(heartFlag)
 if(heartFlag==false){
 
     heartFlag=true;
@@ -182,46 +189,44 @@ if(heartFlag==false){
     heartFlag=false;
 }
 }
-let item={};
-sizeAdded(obj.size[0]);
-let userDetail=JSON.parse(localStorage.getItem("userDetail"));
-//console.log(userDetail)
-document.getElementById("addToCartBtn").addEventListener("click",()=>{
 
-if(userDetail===null||userDetail.login===false){
-    //console.log("heer")
-    myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
-}else{
+// let item={};
+// let userDetail=JSON.parse(localStorage.getItem("userDetail"));
+// //console.log(userDetail)
+// document.getElementById("addToCartBtn").addEventListener("click",()=>{
 
-    item.email=userDetail.email;
+// if(userDetail===null||userDetail.login===false){
+//     //console.log("heer")
+//     myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
+// }else{
+
+//     item.email=userDetail.email;
     
-    item.id=obj.id;
+//     item.id=obj.id;
    
-   
-    
-        //console.log()
-        let itemflag=false;
-        let cartArray=JSON.parse(localStorage.getItem("cartItem"))||[];
-        console.log(item.size)
-        for(let i=0;i<cartArray.length;i++){
-            //console.log(cartArray[i].size)
-            if(cartArray[i].id===obj.id&&cartArray[i].size===item.size&&cartArray[i].email===item.email){
-                //console.log("HEre")
-                itemflag=true;
-                break;
-            }
-        }
-        if(itemflag==true){
-            myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
-        }else{
+//         //console.log()
+//         let itemflag=false;
+//         let cartArray=JSON.parse(localStorage.getItem("cartItem"))||[];
+//         console.log(item.size)
+//         for(let i=0;i<cartArray.length;i++){
+//             //console.log(cartArray[i].size)
+//             if(cartArray[i].id===obj.id&&cartArray[i].size===item.size&&cartArray[i].email===item.email){
+//                 //console.log("HEre")
+//                 itemflag=true;
+//                 break;
+//             }
+//         }
+//         if(itemflag==true){
+//             myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
+//         }else{
 
-            myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true);
-            cartArray.push(item);
-            localStorage.setItem("cartItem",JSON.stringify(cartArray));
+//             myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true);
+//             cartArray.push(item);
+//             localStorage.setItem("cartItem",JSON.stringify(cartArray));
         
-        }
-}
-})
+//         }
+// }
+// })
 function sizeAdded(size){
     
     item.size=size;

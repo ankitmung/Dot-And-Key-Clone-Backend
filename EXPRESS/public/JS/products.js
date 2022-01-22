@@ -352,6 +352,13 @@ function showData(data)
 }
 }
 
+// function to redirect the page to product details page
+    function redirectToIndividualProductPage(id)
+    {
+        window.location.href = `productDetail/${id}`;
+    }   
+
+
 // for pop up alert
 function myFunction(msg, type) {
     var popup = document.getElementById("myPopup");
