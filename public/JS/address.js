@@ -47,6 +47,7 @@ async function addAddress(e) {
 //returns to the cart page
 document.getElementById("return_to_cart")
 .addEventListener("click", function () {
+   console.log("/cartpage");
    window.location.href = "/cartpage";
 });
 
@@ -164,3 +165,4 @@ function myFunction(msg, type, n=0) {
  }
    
   }
+}

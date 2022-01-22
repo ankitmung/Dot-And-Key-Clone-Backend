@@ -92,7 +92,6 @@ var cartPage = async ()=>{
             //console.log(index)
             console.log("index");
             console.log(index, userCart[index]);
-            cartBag.splice(index, 1);
 
             const res2= await fetch(`http://localhost:3000/removeItemFromCart/${userCart[index]._id}`);
         var result  = await res2.json();

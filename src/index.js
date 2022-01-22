@@ -92,7 +92,7 @@ app.get("/cartpage", (req, res) => {
 });
 
 app.get("/userprofile", (req, res) => {
-  return res.render("cart");
+  return res.render("userProfile");
 });
 
 app.get("/address", (req, res) => {
