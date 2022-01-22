@@ -137,7 +137,11 @@ app.get("/payment", (req,res)=>{
   app.get("/paymentDetails", (req,res)=>{
     return res.render("paymentDetails")
     })
-  
+
+    app.get("/thankspage", (req,res)=>{
+      return res.render("thanks")
+      })
+    
 
   app.get("/signuppage", (req,res)=>{
     return res.render("signUp")
