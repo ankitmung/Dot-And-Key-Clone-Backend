@@ -15,6 +15,9 @@ app.set("view engine", "ejs"); // root directory for views views/
 app.use("/products",(req,res)=>{
   return res.render("products")
 })
+app.use("/products/:id",(req,res)=>{
+  return res.render("products")
+})
 
 app.post("/checkCart",async (req,res)=>{
  

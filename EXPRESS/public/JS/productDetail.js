@@ -164,15 +164,66 @@ size.append(div)
 document.getElementById("blow").addEventListener("click", blow);
     
 sizeAdded(obj.size[0]);
-    console.log(obj)
+
+    function sizeAdded(size){
+        console.log(size)
+        // item.size=size;
+    }
+
+    
+let userDetail=JSON.parse(localStorage.getItem("userDetail"));
+
+    document.getElementById("addToCartBtn").addEventListener("click", async ()=>
+    {
+
+    if(userDetail===null){
+        myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
+      }
+      else{
+
+    let itemToCheck = {
+        productID:output,
+        userID:userDetail._id,
+        size:obj.size[0]
+    }
+
+   try{
+    const response = await fetch(`http://localhost:3000/checkCart`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+       body: JSON.stringify(itemToCheck) 
+      });
+      var result = await response.json();
+      console.log(result);
+      if(result.status == "failed")
+      {
+        myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
+      }
+      else{
+        myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true)
+      }
+   }
+   catch(err)
+   {
+       console.log(err.message);
+   }
+}
+
+    });
+
     }
     catch(e)
     {
         console.log(e.message);
     }
+    
 }
 
 printData();
+
+
 
 
 function blow(){
@@ -227,10 +278,7 @@ if(heartFlag==false){
 //         }
 // }
 // })
-function sizeAdded(size){
-    
-    item.size=size;
-}
+
 
 function myFunction(msg, type) {
     var popup = document.getElementById("myPopup");

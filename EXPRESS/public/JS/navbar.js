@@ -79,7 +79,7 @@ function popUp(){
   let searchResult=document.getElementById("Search-input").addEventListener("keypress",function(e){
     if(e.key=="Enter"){
         let content=document.getElementById("Search-input").value;;
-        window.location.href = `products.html?${content}`;
+        window.location.href = `products?${content}`;
     }
 })
 pinkDot()

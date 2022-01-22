@@ -8,9 +8,46 @@ async function func(){
         const res= await fetch("http://localhost:3000/data")
         var data  = await res.json();
         // console.log(data.res);
-        showData(data.res);
-        data=data.res
-        console.log(data)
+
+        data = data.res;
+
+        var url = window.location.href;
+console.log(url);
+ var output= "";
+ var flag = false;
+ for(var i=url.length-1; i>=0 ;i--)
+     {
+         if(url[i] == "?")
+         {
+             flag = true
+             break;
+         }
+         else
+             output+=url[i];
+     }
+ output = output.split("").reverse().join("");
+ console.log("search input passed by navbar page "+output);
+
+ 
+ 
+if(flag)
+{
+    output = output.toLowerCase();
+
+    var dataArray = [];       
+   data.forEach(item => {
+       if(item.title.toLowerCase().indexOf(output) != -1)
+       dataArray.push(item);
+   })
+   data = dataArray;
+   showData(data);
+}
+else{
+    showData(data);
+}
+
+
+       
         
     // Working on filteration and sorting
     var cate = document.getElementById("category-filter");
@@ -120,11 +157,6 @@ async function func(){
         }   
     }
 
-
-
-
-
-      
     }catch(err){
         console.log(err.message)
     }
@@ -134,22 +166,6 @@ func();
 // console.log(data2)
 // async function
 
-// var url = window.location.href;
-// console.log(url);
-//  var output= "";
-//  var flag = false;
-//  for(var i=url.length-1; i>=0 ;i--)
-//      {
-//          if(url[i] == "?")
-//          {
-//              flag = true
-//              break;
-//          }
-//          else
-//              output+=url[i];
-//      }
-//  output = output.split("").reverse().join("");
-//  console.log("search input passed by navbar page "+output);
  
 // if(flag)
 // {
@@ -175,53 +191,6 @@ func();
    
 //     show data function will display the product on the web page
 //     showData(data); 
-
-// // function to redirect the page to product details page
-//     function redirectToIndividualProductPage(id)
-//     {
-//         window.location.href = `productDetail.html?${id}`;
-//     }
-    
-//     // Add to cart functionality
-// let item={};
-// let userDetail=JSON.parse(localStorage.getItem("userDetail"));
-// function addToCart(id){
-
-//     console.log(id);
-//     if(userDetail==null || !(userDetail.login)){
-//         // alert("you need to login first")
-//         myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; You need to login first`, false);
-//     }else{
-    
-//         item.email=userDetail.email;
-        
-//         item.id=id;
-//         // Adding size as defualt value. Because product page has no option se select size;
-//         item.size = "Default";
-        
-//             console.log()
-//             let itemflag=false;
-//             let cartArray=JSON.parse(localStorage.getItem("cartItem"))||[];
-//             console.log(cartArray.size)
-//             for(let i=0;i<cartArray.length;i++){
-//                 if(cartArray[i].id===item.id&&cartArray[i].size===item.size&&cartArray[i].email===item.email){
-//                     //console.log("HEre")
-//                     itemflag=true;
-//                     break;
-//                 }
-//             }
-//             if(itemflag==true){
-//                 // alert("item Alredy added")
-//                 myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; This item is already in cart`, false);
-//             }else{
-//                 myFunction(`<span class="iconify" data-icon="teenyicons:tick-circle-solid" style="color: #3c763d; font-size: 22px;"></span> &nbsp; Item added to cart Successfully`, true);
-//                 cartArray.push(item);
-//                 localStorage.setItem("cartItem",JSON.stringify(cartArray));
-            
-//             }
-//     }
-// }
-
 
 // add to cart function with backend
 
