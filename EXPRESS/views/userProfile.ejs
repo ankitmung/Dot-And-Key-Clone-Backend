@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile (Dot and Key skincare)</title>
+    <link rel="icon" href="https://cdn.shopify.com/s/files/1/0361/8553/8692/files/d_and_k_and_logo_1_32x32.png?v=1593074179">
+    <link rel="stylesheet" href="./CSS/footer.css">
+    <link rel="stylesheet" href="./CSS/nav.css">
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+   <link rel="stylesheet" href="./CSS/userProfile.css">
+</head>
+<body>
+    <div id="nav-container"></div>
+    <div id="detail">
+        <h1>My account</h1>
+        <div id="logout">log out</div>
+
+        <div id="myaccdetail">
+            <div></div>
+            <div>
+                <h2>Order History</h2>
+                <h3>You haven't placed any orders yet.</h3>
+            </div>
+            <div>
+                <h2>Account details</h2>
+                <h3 id="name" style="margin-left: 5px;"></h3>
+                <h2>View addresses (0)</h2>
+            </div>
+        </div>
+    </div>
+    <div id="footer-container">
+
+    </div>
+</body>
+</html>
+<script type="module">
+    import  {navBar,popUp} from './JS/navbar.js';
+    document.getElementById("nav-container").innerHTML = navBar();
+    popUp();
+
+    import footer from './JS/footer.js';
+    console.log(footer)
+    document.getElementById("footer-container").innerHTML = footer();
+</script>
+<script src="./JS/userProfile.js"></script>

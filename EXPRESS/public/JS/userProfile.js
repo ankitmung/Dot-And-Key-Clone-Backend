@@ -2,7 +2,7 @@
     let userDetails=JSON.parse(localStorage.getItem("userDetail"));
     console.log(userDetails)
     if(userDetails==null||userDetails==undefined||userDetails.login==false){
-        window.location.href="login.html"
+        window.location.href="/loginpage"
     }
     let userName=userDetails.name;
     console.log(userName)
@@ -15,5 +15,5 @@
         console.log(userDetails);
         //localStorage.removeItem("userDetail")
         localStorage.setItem("userDetail",JSON.stringify(userDetails));
-        window.location.href="login.html";
+        window.location.href="/loginpage";
     }

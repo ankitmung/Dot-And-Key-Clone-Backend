@@ -4,7 +4,7 @@ console.log(user);
 /// Whenever user not login redirected to login page;
 if (user == null || user.login == false) {
   alert("You have to login first");
-  window.location.href = "login.html";
+  window.location.href = "/loginpage";
 }
 
 // container of all the cart product

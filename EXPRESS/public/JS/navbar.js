@@ -20,8 +20,8 @@ function navBar(){
                 <input type="text" placeholder="Search" id="Search-input">
             </span>
             <div id="pinked"></div>
-            <a href="cart.html"><span class="iconify bag-profile" id="bag" data-icon="teenyicons:bag-outline"></span></a>
-            <a href="userProfile.html"><span  style="font-size:30px;" id="profile" class="iconify bag-profile" data-icon="clarity:user-line"></span></a>
+            <a href="/cartpage"><span class="iconify bag-profile" id="bag" data-icon="teenyicons:bag-outline"></span></a>
+            <a href="/userprofile"><span  style="font-size:30px;" id="profile" class="iconify bag-profile" data-icon="clarity:user-line"></span></a>
            </div>
         </div>
     </div>
@@ -43,7 +43,7 @@ function navBar(){
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">GIFT, WITH LOVE</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">IKWI NUTRITION</h4></a>
                 <a href="" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">KNOW US BETTER</h4></a>
-                <a href="userProfile.html" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">PROFILE</h4></a>
+                <a href="/userprofile" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">PROFILE</h4></a>
                 <a href="/loginpage" class="navPopAnchor"><h4  style="font-size:14px; line-height: 2; font-weight:bold;">LOG IN</h4></a>
             </div>
             

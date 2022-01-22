@@ -97,6 +97,11 @@ app.get("/cartpage",(req,res)=>{
   return res.render("cart")
   })
 
+  
+app.get("/userprofile",(req,res)=>{
+    return res.render("userProfile")
+    })
+
 app.get("/signuppage", (req,res)=>{
 return res.render("signUp")
 })
