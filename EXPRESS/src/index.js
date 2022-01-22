@@ -6,6 +6,7 @@ app.use(express.json())
 const userController=require('./controller/user.controller')
 const Product=require("./model/products.model")
 const Cart=require("./model/cart.model")
+const Address=require("./model/address.model")
 app.use("/user",userController)
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs"); // root directory for views views/
@@ -102,14 +103,46 @@ app.get("/cartpage",(req,res)=>{
     return res.render("cart")
     })
   
-    app.get("/address",(req,res)=>{
-        return res.render("address")
-        })
-
-app.get("/signuppage", (req,res)=>{
-return res.render("signUp")
+app.get("/address",(req,res)=>{
+    return res.render("address")
 })
 
+app.post("/postAddress",async(req,res)=>{
+  try{
+    const data=await Address.create(req.body);
+    return res.json({status:"success"});
+  }catch(err){
+    return res.status(400).json(err.message)
+  }
+})
+       
+
+  
+app.get("/shipping",(req,res)=>{
+  return res.render("shipping")
+})
+  
+app.get("/findAddress/:id",async (req,res)=>{
+  const item = await Address.find({userID:req.params.id}).lean().exec();
+  console.log(item);
+  return res.json({res:item});
+})
+
+
+
+app.get("/payment", (req,res)=>{
+  return res.render("payment")
+  })
+
+  app.get("/paymentDetails", (req,res)=>{
+    return res.render("paymentDetails")
+    })
+  
+
+  app.get("/signuppage", (req,res)=>{
+    return res.render("signUp")
+    })
+      
 app.get("/index",async (req,res)=>{
 return res.render("index")
 })

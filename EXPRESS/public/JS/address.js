@@ -1,10 +1,10 @@
  // store address which is written in form
 
+ let user = JSON.parse(localStorage.getItem("userDetail"));
  document.querySelector("form").addEventListener("submit",addAddress);
- var address = JSON.parse(localStorage.getItem("addressInfo")) || [];
- function addAddress(a) {
- a.preventDefault();
- let user_detail = JSON.parse(localStorage.getItem("userDetail"));
+//  var address = JSON.parse(localStorage.getItem("addressInfo")) || [];
+async function addAddress(e) {
+ e.preventDefault();
 
  var addressObj = {
      country:form.use_address1.value,
@@ -16,58 +16,87 @@
      state: form.state_name.value,
      pincode: form.pin_code.value,
      phonenum: form.phone_num.value,
-     saveInfo: form.save_info.value,
-     email:user_detail.email
+     email:user.email,
+     userID:user._id
  };
 
- console.log(addressObj);
- address.push(addressObj);
- localStorage.setItem("addAddress", JSON.stringify(address));
-} 
-
-
-//  document.querySelector("button").addEventListener("click",function() {
-//     //  window.location.href = "cart.html";
-//  });
+ if(addressObj.country=="" || addressObj.firstname=="" || addressObj.lastname=="" || addressObj.address_one=="" || addressObj.address_two=="" || addressObj.city=="" || addressObj.state=="" || addressObj.pincode=="" || addressObj.phonenum=="")
+ {
+   //  console.log("validation failed");  
+   myFunction(`<span class="iconify" data-icon="bx:bxs-error" style="color: maroon; font-size: 22px;"></span> &nbsp; All fields are Mandatory`, false);
+ } 
+ else
+ {
+   const response = await fetch(`http://localhost:3000/postAddress`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+     body: JSON.stringify(addressObj) // body data type must match "Content-Type" header
+    });
+    var result = await response.json();
+//   console.log(result);
+  if(result.status == "success")
+  {
+     window.location.href = "/shipping";
+  }
+ }
 
 
 //returns to the cart page
 document.getElementById("return_to_cart")
 .addEventListener("click", function () {
-   window.location.href = "cart.html";
+   window.location.href = "/cartpage";
 });
 
 
-//go to the shipping page
+// go to the shipping page
 document.getElementById("return_to_shipping")
 .addEventListener("click", function () {
-   window.location.href = "../shiping2.html";
+   window.location.href = "/shipping";
 });
 
 
+
+var showCartItems = async ()=>{
+   const response = await fetch(`http://localhost:3000/cartdata`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json'
+     },
+    body: JSON.stringify({userID:user._id})
+   });
+   var result = await response.json();
+   // console.log(result);
+ 
+   var userCart = result.res;
+ 
+ 
+   const res= await fetch("http://localhost:3000/data")
+         var data  = await res.json();
+       
+         var prodBag=data.res;
+ 
+
+         
 //access user login details(name and email)
 
  user_detail = JSON.parse(localStorage.getItem("userDetail"));
-//console.log(user_detail);
-let names=document.getElementById("user_details_name");
-names.textContent=`${user_detail.name}, ${user_detail.email}`;
+ //console.log(user_detail);
+ let names=document.getElementById("user_details_name");
+ names.textContent=`${user_detail.name}, ${user_detail.email}`;
+ 
+ let cartDiv=document.getElementById("cartBox");
 
-let cartDiv=document.getElementById("cartBox");
-
-
-let cartBag=JSON.parse(localStorage.getItem("cartItem"));
-let prod=JSON.parse(localStorage.getItem("DotAndKeyProducts"));
-////console.log(prod)
-console.log(cartBag)
-//cartDiv.innerHTML=""
-let totalAmount=0;
-cartBag.map((item)=>{
-   let x=prod.filter((el)=>{
-      if(item.id===el.id){
+ let totalAmount=0;
+userCart.map((item)=>{
+   let x=prodBag.filter((el)=>{
+      if(item.productID===el._id){
          return true;
       }
    })
-   //console.log(x)
+   // console.log(x)
    let num;
    let div=document.createElement("div");
    let divimg=document.createElement("div")
@@ -78,7 +107,7 @@ cartBag.map((item)=>{
    }else{
        num=1;
    }
-   console.log(num)
+   // console.log(num)
    let nodiv=document.createElement("div");
    nodiv.setAttribute("class","quantutyno");
    nodiv.textContent=num;
@@ -102,3 +131,36 @@ cartBag.map((item)=>{
 document.getElementById("subtotal").innerHTML=`Subtotal. Rs. &#8377;${totalAmount.toFixed(2)}`
 document.getElementById("total").innerHTML=`Total Rs. &#8377;${totalAmount.toFixed(2)}`
 //console.log(totalAmount);
+
+ 
+};
+
+showCartItems();
+
+
+function myFunction(msg, type, n=0) {
+   var popup = document.getElementById("myPopup");
+   popup.innerHTML = msg;
+   if(type)
+   {
+       popup.style.color="#3C763D";
+       popup.style.backgroundColor = "#DFF0D8"; 
+       popup.style.border = "2px solid #3C763D";
+   }
+   else
+   {
+       popup.style.color="maroon";
+       popup.style.backgroundColor = "#F2DEDE"; 
+       popup.style.border = "2px solid maroon";
+   }
+   popup.classList.toggle("show");
+
+   const myTimeout = setTimeout(myGreeting, 2000);
+   
+   function myGreeting() {
+  popup.classList.toggle("show");
+  if(n==1)
+       window.location.href = "login.html";
+ }
+   
+  }
