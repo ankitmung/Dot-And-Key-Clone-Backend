@@ -67,10 +67,35 @@ app.get("/data",async(req,res)=>{
 })
 
 
+app.post("/cartdata",async(req,res)=>{
+  try{
+    const data=await Cart.find({userID:req.body.userID}).lean().exec();
+    console.log(data)
+    return res.json({res:data})
+  }catch(err){
+    return res.status(400).json(err.message)
+  }
+})
+
+app.get("/removeItemFromCart/:id",async(req,res)=>{
+  try {
+    const item = await Cart.findByIdAndDelete(req.params.id).lean().exec();
+    return res.status(200).send({status:"success"});
+  } catch (err) {
+    console.log(err.message)
+    return res.status(500).send({status:err.message});
+  }
+})
+
 
 app.get("/loginpage",(req,res)=>{
-return res.render("login")
-})
+  return res.render("login")
+  })
+
+  
+app.get("/cartpage",(req,res)=>{
+  return res.render("cart")
+  })
 
 app.get("/signuppage", (req,res)=>{
 return res.render("signUp")

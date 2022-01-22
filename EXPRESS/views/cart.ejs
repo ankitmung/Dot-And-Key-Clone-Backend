@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/footer.css">
+    <link rel="stylesheet" href="./CSS/nav.css">
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="./CSS/cart.css">
+    <title>Cart Page</title>
+    <link rel="icon" href="https://cdn.shopify.com/s/files/1/0361/8553/8692/files/d_and_k_and_logo_1_32x32.png?v=1593074179">
+</head>
+<body>
+    <div id="nav-container"></div>
+    <div id="cart-container">
+        <h1>Bag</h1>
+        <span id="qunt">QUANTITY</span><span id="tot">TOTAL</span>
+        <div id="cart-product">
+
+        </div>
+    </div>
+    <hr>
+    <div id="subtotalDiv">
+        <div style="display: flex;  font-size: 14px;">
+
+            <h1>Subtotal</h1>
+            <h1 id="subtotal"></h1>
+        </div>
+        <div style="margin-bottom: 2000px;">
+            <button class="checkoutbtn" id="checkout">Check Out</button>
+            <button class="checkoutbtn" id="updatecart">Update Cart</button>
+        </div>
+    </div>
+    <span class="popuptext" id="myPopup"></span>
+    <div id="footer-container">
+
+    </div>
+    
+</body>
+</html>
+<script src="./JS/cart.js"></script>
+<script type="module">
+    import  {navBar,popUp} from './JS/navbar.js';
+    document.getElementById("nav-container").innerHTML = navBar();
+    popUp();
+
+    import footer from './JS/footer.js';
+    document.getElementById("footer-container").innerHTML = footer();
+</script>
