@@ -46,7 +46,7 @@ app.get("/productDetail/:id", async (req, res) => {
 app.post("/findProductDetails", async (req, res) => {
   try {
     const data = await Product.findById(req.body.id).lean().exec();
-    console.log(data);
+    // console.log(data);
     return res.json({ item: data });
   } catch (err) {
     return res.status(400).json(err.message);
@@ -66,7 +66,7 @@ app.get("/data", async (req, res) => {
 app.post("/cartdata", async (req, res) => {
   try {
     const data = await Cart.find({ userID: req.body.userID }).lean().exec();
-    console.log(data);
+    // console.log(data);
     return res.json({ res: data });
   } catch (err) {
     return res.status(400).json(err.message);
@@ -114,7 +114,7 @@ app.get("/shipping", (req, res) => {
 
 app.get("/findAddress/:id", async (req, res) => {
   const item = await Address.find({ userID: req.params.id }).lean().exec();
-  console.log(item);
+  // console.log(item);
   return res.json({ res: item });
 });
 
