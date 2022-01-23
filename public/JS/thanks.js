@@ -79,8 +79,10 @@ let tab=document.querySelector("table");
 
 
    let price=document.createElement("td");
-   price.textContent=prod[0].price;
-   total+=+prod[0].price;
+   let disc = Math.floor((prod[0].discount / 100) *prod[0].price*item.quantity);
+   console.log(disc)
+   price.textContent=((prod[0].price*item.quantity-disc)).toFixed(2);
+   total+=+prod[0].price*item.quantity;
 
 
    tr.prepend(sr,title,size,quantity,price);

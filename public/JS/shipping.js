@@ -31,6 +31,7 @@ var showCartItems = async ()=>{
   let cartDiv=document.getElementById("cartBox");
  
   let totalAmount=0;
+  console.log(userCart)
  userCart.map((item)=>{
     let x=prodBag.filter((el)=>{
        if(item.productID===el._id){
@@ -57,8 +58,8 @@ var showCartItems = async ()=>{
  
     divimg.append(nodiv,img)
     let price=document.createElement("h5");
-    let disc = Math.floor((x[0].discount / 100) * x[0].price);
-    disc = x[0].price - disc;
+    let disc = Math.floor((x[0].discount / 100) * x[0].price*item.quantity);
+    disc = x[0].price*item.quantity - disc;
     totalAmount+=+disc;
     price.innerHTML= `&#8377; ${disc.toFixed(2)}`;
  
