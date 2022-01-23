@@ -1,6 +1,6 @@
 var quentityArray;
 let user = JSON.parse(localStorage.getItem("userDetail"));
-console.log(user);
+// console.log(user);
 /// Whenever user not login redirected to login page;
 if (user == null || user.login == false) {
   alert("You have to login first");
@@ -20,9 +20,10 @@ var cartPage = async ()=>{
    body: JSON.stringify({userID:user._id})
   });
   var result = await response.json();
-  console.log(result);
+  // console.log(result);
 
   var userCart = result.res;
+  // console.log(userCart)
 
 
   const res= await fetch("http://localhost:3000/data")
@@ -63,7 +64,7 @@ var cartPage = async ()=>{
               return true;
             }
           });
-          console.log(prod)
+          // console.log(prod)
   
           ///main div
           let div = document.createElement("div");
@@ -90,13 +91,13 @@ var cartPage = async ()=>{
           //// to remove the cart item from bag
           remBtn.addEventListener("click", async () => {
             //console.log(index)
-            console.log("index");
-            console.log(index, userCart[index]);
+            // console.log("index");
+            // console.log(index, userCart[index]);
 
             const res2= await fetch(`http://localhost:3000/removeItemFromCart/${userCart[index]._id}`);
         var result  = await res2.json();
       
-            console.log(result);
+            // console.log(result);
 
 
             // localStorage.setItem("cartItem", JSON.stringify(cartBag));
@@ -110,7 +111,7 @@ var cartPage = async ()=>{
           QuentityDiv.setAttribute("id", "quentity");
           let queInput = document.createElement("input");
           queInput.setAttribute("class", "inputnum");
-          console.log(item.quantity, item);
+          // console.log(item.quantity, item);
   
           /// whenever quantity key is not present in cart bag.
           if (item.quantity == undefined || item.quantity == null) {
@@ -138,7 +139,7 @@ var cartPage = async ()=>{
             let indexingofitem = e.target.parentNode.nextSibling.textContent;
   
             // indexingofitem=+indexingofitem;
-            console.log(indexingofitem);
+            // console.log(indexingofitem);
   
             // let num=document.querySelector(".inputnum").value;
             // console.log(num)
@@ -167,7 +168,7 @@ var cartPage = async ()=>{
             item.quantity = num;
   
             /// function which used for adding the quantity of eatch item.
-            quantityAdder();
+            quantityAdder(item,num);
           });
   
           let amountDiv = document.createElement("div");
@@ -200,10 +201,24 @@ var cartPage = async ()=>{
   
 
   /// function which update the quantity of all the items in cart for future prefrence and update to localstorege
-  function quantityAdder() {
+  async function quantityAdder(item,num) {
+    let obj={};
+    obj.quantity=num;
+    console.log(item._id)
     userCart.map((el, index) => {
       el.quantity = quentityArray[index];
     });
+    const response = await fetch(`http://localhost:3000/cartpage/${item._id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+   body:JSON.stringify(obj)
+  });
+  console.log(num)
+  var result = await response.json();
+  console.log(result);
+
 
     // localStorage.setItem("cartItem", JSON.stringify(userCart));
     // console.log(userCart);

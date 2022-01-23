@@ -73,6 +73,7 @@ app.post("/cartdata", async (req, res) => {
   }
 });
 
+
 app.get("/removeItemFromCart/:id", async (req, res) => {
   try {
     const item = await Cart.findByIdAndDelete(req.params.id).lean().exec();
@@ -90,6 +91,17 @@ app.get("/loginpage", (req, res) => {
 app.get("/cartpage", (req, res) => {
   return res.render("cart");
 });
+
+app.patch("/cartpage/:id", async (req, res) => {
+  try {
+    const data = await Cart.findByIdAndUpdate(req.params.id,req.body,{new:true})
+    // console.log(data);
+    return res.json({ res: data });
+  } catch (err) {
+    return res.status(400).json(err.message);
+  }
+});
+
 
 app.get("/userprofile", (req, res) => {
   return res.render("userProfile");
