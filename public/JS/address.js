@@ -1,5 +1,5 @@
  // store address which is written in form
-
+ var showCartItems;
  let user = JSON.parse(localStorage.getItem("userDetail"));
  document.querySelector("form").addEventListener("submit",addAddress);
 //  var address = JSON.parse(localStorage.getItem("addressInfo")) || [];
@@ -27,7 +27,8 @@ async function addAddress(e) {
  } 
  else
  {
-   const response = await fetch(`http://localhost:3000/postAddress`, {
+   async function backendFunc(){
+      const response = await fetch(`http://localhost:3000/postAddress`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json'
@@ -41,6 +42,8 @@ async function addAddress(e) {
   {
      window.location.href = "/shipping";
   }
+   }
+   backendFunc(); 
  }
 
 
@@ -59,8 +62,40 @@ document.getElementById("return_to_shipping")
 });
 
 
+// showCartItems();
 
-var showCartItems = async ()=>{
+
+function myFunction(msg, type, n=0) {
+   var popup = document.getElementById("myPopup");
+   popup.innerHTML = msg;
+   if(type)
+   {
+       popup.style.color="#3C763D";
+       popup.style.backgroundColor = "#DFF0D8"; 
+       popup.style.border = "2px solid #3C763D";
+   }
+   else
+   {
+       popup.style.color="maroon";
+       popup.style.backgroundColor = "#F2DEDE"; 
+       popup.style.border = "2px solid maroon";
+   }
+   popup.classList.toggle("show");
+
+   const myTimeout = setTimeout(myGreeting, 2000);
+   
+   function myGreeting() {
+  popup.classList.toggle("show");
+  if(n==1)
+       window.location.href = "login.html";
+ }
+   
+  }
+}
+
+
+
+showCartItems = async ()=>{
    const response = await fetch(`http://localhost:3000/cartdata`, {
      method: 'POST',
      headers: {
@@ -136,33 +171,5 @@ document.getElementById("total").innerHTML=`Total Rs. &#8377;${totalAmount.toFix
  
 };
 
+
 showCartItems();
-
-
-function myFunction(msg, type, n=0) {
-   var popup = document.getElementById("myPopup");
-   popup.innerHTML = msg;
-   if(type)
-   {
-       popup.style.color="#3C763D";
-       popup.style.backgroundColor = "#DFF0D8"; 
-       popup.style.border = "2px solid #3C763D";
-   }
-   else
-   {
-       popup.style.color="maroon";
-       popup.style.backgroundColor = "#F2DEDE"; 
-       popup.style.border = "2px solid maroon";
-   }
-   popup.classList.toggle("show");
-
-   const myTimeout = setTimeout(myGreeting, 2000);
-   
-   function myGreeting() {
-  popup.classList.toggle("show");
-  if(n==1)
-       window.location.href = "login.html";
- }
-   
-  }
-}
