@@ -153,4 +153,9 @@ const { register, login } = require("./controller/auth.controller");
 app.post("/register", register);
 app.post("/login", login);
 
+
+app.get("*", function (req, res) {
+  res.render("Error_page");   
+});
+
 module.exports = app;
